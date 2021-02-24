@@ -2,7 +2,7 @@ const credentials = require("./configAWS").configAWS;
 const AWS = require("aws-sdk");
 
 AWS.config.update(credentials);
-const DynamonDB = new AWS.DynamoDB();
+const DynamonDB = new AWS.DynamoDB.DocumentClient();
 
 const createTable = () => {
     return new Promise((resolve, reject) => {
@@ -21,16 +21,16 @@ const createTable = () => {
                 WriteCapacityUnits: 10
             }
         };
-        DynamonDB.createTable(params, (error, data) => {
+        /*DynamonDB.createTable(params, (error, data) => {
             if(error) return reject(error);
             return resolve(data);
-        });
+        });*/
     });
 }
 
 const getItems = (params) => {
     return new Promise((resolve, reject) => {
-        DynamonDB.getItem(params, (error, data)=> {
+        DynamonDB.get(params, (error, data)=> {
             if(error) return reject(error);
             return resolve(data);
         });
@@ -39,7 +39,7 @@ const getItems = (params) => {
 
 const putItem = (params) => {
     return new Promise((resolve ,reject) => {
-        DynamonDB.putItem(params, (error, data) => {
+        DynamonDB.put(params, (error, data) => {
             if(error) return reject(error);
             return resolve(data);
         });
@@ -48,7 +48,16 @@ const putItem = (params) => {
 
 const deleteItem = (params) => {
     return new Promise((resolve, reject) => {
-        DynamonDB.deleteItem(params, () => {
+        DynamonDB.delete(params, (error, data) => {
+            if(error) return reject(error);
+            return resolve(data);
+        });
+    });
+}
+
+const query = (params) => {
+    return new Promise((resolve, reject) => {
+        DynamonDB.query(params, (error, data) => {
             if(error) return reject(error);
             return resolve(data);
         });
@@ -59,5 +68,6 @@ module.exports = {
     createTable,
     getItems,
     putItem,
-    deleteItem
+    deleteItem,
+    query
 };
