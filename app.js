@@ -9,23 +9,15 @@ const usersController = require('./controllers/users');
 
 const app = express();
 
-const Infraestructure = require("./infraestructure/dynamondb");
-
-Infraestructure.createTable().then(res => {
-    console.log("Successfull CreateTables AWS DynamonDB ",res);
-}).catch(error => {
-    console.error(error);
-});
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/project', projectController);
+/*app.use('/project', projectController);
 app.use('/task', taskController);
-app.use('/timeTracking', timeTracking);
-app.use('/users', usersController);
+app.use('/timeTracking', timeTracking);*/
+app.use('/v1', usersController);
 
 
 module.exports = app;
