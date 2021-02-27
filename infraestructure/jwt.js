@@ -4,7 +4,7 @@ const config =  require("config");
 const TOKEN  = process.env.NODE_ENV === undefined 
     ? config.get("TOKEN") :  process.env.TOKEN;
 
-console.log("TOKEN", TOKEN);
+
 const createSign = (info) => {
     return jwt.sign(info, TOKEN, {expiresIn: 1440});
 }
