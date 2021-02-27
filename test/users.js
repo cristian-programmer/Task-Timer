@@ -43,10 +43,10 @@ describe("User API ", () => {
         };
 
         chai.request(server)
-        .post("/v1/users/login")
+        .post("/v1/users")
         .send(user)
         .end((error, res) => {
-            res.should.have.status(404);
+            res.should.have.status(400);
             res.headers["content-type"].should.contains("application/json");
             res.body.should.have.property("error").eql("missing send parameters");
             pass();
@@ -55,20 +55,40 @@ describe("User API ", () => {
 
     it("should logged a user", (pass) => {
         const user = {
-
+            username: "cvg97",
+            password: "abc1"
         };
 
         chai.request(server)
         .post("/v1/users/login")
         .send(user)
         .end((error, res) => {
-            res.should.have.status(404);
+            res.should.have.status(200);
             res.headers["content-type"].should.contains("application/json");
-            res.body.should.have.property("error").eql("missing send parameters");
+            res.body.should.have.property("id");
+            res.body.should.have.property("token");
+            res.body.should.have.property("login").eql(true);
             pass();
         });
     });
 
+
+    it("should fail logged a user", (pass) => {
+        const user = {
+            username: "cvg97",
+        };
+
+        chai.request(server)
+        .post("/v1/users/login")
+        .send(user)
+        .end((error, res) => {
+            res.should.have.status(400);
+            res.headers["content-type"].should.contains("application/json");
+            res.body.should.have.property("error").eql("missing send parameters");
+            res.body.should.have.property("login").eql(false);
+            pass();
+        });
+    });
 
     after(()=> {
         mongo.closeConnection();
