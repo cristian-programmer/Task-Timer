@@ -32,8 +32,19 @@ const getAllTask = async () => {
     return await taskModel.find();
 }
 
+
+const cleanSchemaTask = async() => {
+    try {
+        return await userModel.deleteMany({});
+    } catch (error) {
+        return error;
+    }
+    
+}
+
 module.exports = {
     createTask,
     getAllTaskByUser,
-    getAllTask
+    getAllTask,
+    cleanSchemaTask
 }
