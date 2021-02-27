@@ -8,18 +8,17 @@ const jwt = require('../infraestructure/jwt');
 router.post('/users/login', async (req, res) => {
   const {username, password} = req.body;
   try {
-    if(username !== "" && password !== ""){
+    if(username && password){
       const userLogged = await userModel.signIn({username,password});
       console.log(userLogged.length);
       if(userLogged.length > 0) {
         const token = jwt.createSign({username, password});
-        res.status(200).json({token, id: userLogged[0]._id});
-      }else {
-        res.json(404);
+        return res.status(200).json({token, id: userLogged[0]._id, login: true});
       }
-    }else {
-      res.sendStatus(401);
     }
+
+    res.status(400).json({error: "missing send parameters", login: false});
+    
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -35,7 +34,7 @@ router.post('/users', async (req, res) => {
     if(Object.keys(created).length > 0) return res.status(201).json({created: "created"});
   }
   
-  res.status(404).json({error: "missing send parameters"});
+  res.status(400).json({error: "missing send parameters"});
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
