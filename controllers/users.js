@@ -2,19 +2,18 @@ const  express = require('express');
 const router = express.Router();
 
 const userModel = require('./../models/users');
-
 const jwt = require('../infraestructure/jwt');
 
 
 router.post('/users/login', async (req, res) => {
-  const user = req.body;
+  const {username, password} = req.body;
   try {
-    if(user.username !== "" && user.password !== ""){
-      const logged = await userModel.signIn(user);
-      console.log(logged);
-      if(Object.keys(logged).length > 0) {
-        const token = jwt.createSign(user);
-        res.status(200).json({token});
+    if(username !== "" && password !== ""){
+      const userLogged = await userModel.signIn({username,password});
+      console.log(userLogged.length);
+      if(userLogged.length > 0) {
+        const token = jwt.createSign({username, password});
+        res.status(200).json({token, id: userLogged[0]._id});
       }else {
         res.json(404);
       }
@@ -22,27 +21,24 @@ router.post('/users/login', async (req, res) => {
       res.sendStatus(401);
     }
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 });
 
 
 router.post('/users', async (req, res) => {
-  const newUser = req.body;
-  console.log(newUser);
-  if(newUser != undefined) {
-    try {
-      const created = await userModel.createUser(newUser);
-      if(created != undefined) {
-        res.sendStatus(201);
-      }else {
-        res.sendStatus(404);
-      }
-    } catch (error) {
-      res.sendStatus(500);
-    }
-  }else {
-    res.sendStatus(404);
+  try {
+  const {username, password, email, name} = req.body;
+  if(username && password &&  name && email) {
+    const created = await userModel.createUser({username, password, name, email});
+    if(Object.keys(created).length > 0) return res.status(201).json({created: "created"});
+  }
+  
+  res.status(404).json({error: "missing send parameters"});
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
   }
 });
 

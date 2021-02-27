@@ -1,59 +1,54 @@
-const {v4: uuidv4 } = require('uuid');
-const dynamodb = require("./../infraestructure/dynamondb");
-const TABLE_NAME = "users";
+const mongoose =  require("mongoose");
+const {Schema} = mongoose; 
 
-const createUser = async (newUser) => {
-    const params = {
-        TableName: TABLE_NAME,
-        Item: {
-             "password": newUser.password,
-             "name": newUser.name,
-             "username": newUser.username,
-             "idUser": uuidv4(),
-        }
-    };
+const userSchema = new Schema({
+    username: {type: String, required: true},
+    password: {type: String, required: true},
+    name: {type: String, required: true},
+    email: {type: String, required: true}
+});
 
+const userModel =  mongoose.model("users", userSchema);
+
+const createUser = async (user) => {
     try {
-        const result = await dynamodb.putItem(params);
-        console.log(result);
-        return result;
+        const instance = new userModel(user);
+        return await instance.save();
     } catch (error) {
-        console.error(error);
+        return error;
+    }
+   
+}
+
+const signIn = async (user) => {
+    try {
+        return await userModel.find(user);
+    } catch (error) {
+        return error;
+    }
+    
+}
+
+const getUserById = async (idUser) => {
+    try {
+        return await userModel.findById(idUser);
+    } catch (error) {
         return error;
     }
 }
 
-const signIn = async (user) => {
-    /*const params = {
-        TableName: TABLE_NAME,
-        KeyConditionExpression: "#pass = :p and #user = :u",
-        ExpressionAttributeNames: {
-            "#pass": "password",
-            "#user": "username"
-        },
-        ExpressionAttributeValues: {
-            ":p": user.password,
-            ":u": user.username 
-        }
-    }*/
-
-    const params = { 
-        TableName: TABLE_NAME,
-        Key: {
-            "password": user.password,
-           
-        },
-        "username": user.username
-    }
+const cleanSchemaUser = async() => {
     try {
-        const result =  await dynamodb.getItems(params);
-        return result;
+        return await userModel.deleteMany({});
     } catch (error) {
         return error;
     }
+    
 }
 
 module.exports = {
     createUser,
-    signIn
+    signIn,
+    getUserById,
+    cleanSchemaUser
 };
