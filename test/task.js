@@ -7,9 +7,9 @@ const taskModel = require("./../models/task");
 chai.use(chaiHttp);
 
 describe("API TASK" , () => {
-    before((done)=> {
+    beforeEach((done)=> {
         taskModel.cleanSchemaTask().then(res=> {
-            done();
+           done();
         }).catch(error => {
             throw error;
         });
