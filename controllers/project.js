@@ -21,11 +21,11 @@ router.get("/projects/user/:id", async (req, res) =>{
 router.post("/projects", async (req, res)=> {
   const {name, description, idUser } = req.body;
   try {
-    if(name !== "" && description !== "" && idUser !== ""){
+    if(name && description && idUser){
       const saved = await projectModel.createProject({name, description, idUser});
       console.log(saved);
       if(Object.keys(saved).length > 0){
-        res.sendStatus(201);
+        res.status(201).json({created:"created", id: saved._id});
       }else {
         res.sendStatus(404);
       }

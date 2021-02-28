@@ -27,9 +27,18 @@ const getAllProjectByUser = async (idUser) => {
     return await projectModel.find(idUser);
 }
 
+const cleanSchemaProject = async () => {
+    try {
+        return await projectModel.deleteMany({});
+    } catch (error) {
+        return error;
+    }
+}
+
 module.exports = {
     createProject,
     addTasktoAproject,
     getAllProjectByUser,
+    cleanSchemaProject
 
 };
