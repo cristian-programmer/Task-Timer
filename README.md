@@ -45,6 +45,9 @@ Para ver la implementacion de un servidor EC2 [presione aqui](INFRAESTRUCTURE.md
     - AWS account
     - Postman
 
+## Test Coverage
+![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/testcoverage.PNG)
+
 ## Extra
  No hace parte de los requerimientos pero decidi implementar una Aplicacion
  que interactuara con la API, esta desarrollada en Reactjs y hospedad en amazon EC2, puede verla [Aqui](http://ec2-18-207-142-206.compute-1.amazonaws.com:3000/), Esto lo hice pensando en implementar uno de los requerimientos, la cual era llevar el tiempo las tareas.
