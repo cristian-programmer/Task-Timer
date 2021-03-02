@@ -4,3 +4,4 @@ example.json
 package-lock.json
 .package.swp
 package.jsonx
+.nyc_output
