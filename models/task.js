@@ -25,7 +25,7 @@ const createTask = async (task) => {
 
 const getAllTaskByUser = async (idUser) => {
   console.log("getAllTaskByUser ", idUser);
-  return await taskModel.find(idUser).sort({ createdAt: "desc" });
+  return await taskModel.find(idUser).sort({ createdAt: "asc" });
 };
 
 const getAllTask = async () => {
