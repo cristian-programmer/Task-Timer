@@ -1,37 +1,38 @@
-const express = require('express');
-const  router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 const projectModel = require("../models/project");
 
-router.get("/projects/user/:id", async (req, res) =>{
+router.get("/projects/user/:id", async (req, res) => {
   const idUser = req.params.id;
   try {
-    if(idUser !== ""){
-      const projects = await projectModel.getAllProjectByUser({idUser});
-      res.status(200).json({projects});
-    }else {
-      res.sendStatus(404);
+    if (idUser) {
+      const projects = await projectModel.getAllProjectByUser({ idUser });
+      return res.status(200).json({ projects });
     }
+    res.status(400).json({ error: "missing send parameters" });
   } catch (error) {
     res.sendStatus(500);
     console.error(error);
   }
 });
 
-router.post("/projects", async (req, res)=> {
-  const {name, description, idUser } = req.body;
+router.post("/projects", async (req, res) => {
+  const { name, description, idUser } = req.body;
   try {
-    if(name && description && idUser){
-      const saved = await projectModel.createProject({name, description, idUser});
+    if (name && description && idUser) {
+      const saved = await projectModel.createProject({
+        name,
+        description,
+        idUser,
+      });
       console.log(saved);
-      if(Object.keys(saved).length > 0){
-        res.status(201).json({created:"created", id: saved._id});
-      }else {
-        res.sendStatus(404);
+      if (Object.keys(saved).length > 0) {
+        return res.status(201).json({ created: "created", id: saved._id });
       }
-
-    }else {
-      res.sendStatus(404);
+      res.status(400).json({ error: "no-created" });
+    } else {
+      res.status(400).json({ error: "missing send parameters" });
     }
   } catch (error) {
     console.error(error);
@@ -41,21 +42,20 @@ router.post("/projects", async (req, res)=> {
 
 router.patch("/projects/:id/task", async (req, res) => {
   const idProject = req.params.id;
-  const {idTask} = req.body;
+  const { idTask } = req.body;
   try {
-    if(idProject && idTask){
+    if (idProject && idTask) {
       const updated = await projectModel.addTasktoAproject(idProject, idTask);
-      console.log("updated ",updated);
-      if(updated.nModified > 0)
-	return res.status(200).json({updated: "updated"});
-
+      console.log("updated ", updated);
+      if (updated.nModified > 0)
+        return res.status(200).json({ updated: "updated" });
     }
 
-    res.status(400).json({error:"missing send parameters"});
-  } catch (error){
+    res.status(400).json({ error: "missing send parameters" });
+  } catch (error) {
     console.log(error);
     res.sendStatus(500);
-  } 
+  }
 });
 
 module.exports = router;
