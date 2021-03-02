@@ -53,6 +53,7 @@ Para ver la implementacion de un servidor EC2 [presione aqui](INFRAESTRUCTURE.md
 
  ![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/tasktimerui.PNG)
 
+Las credenciales de inicio son: cris para el usuario y 123 para la contraseña.
 
 
 
