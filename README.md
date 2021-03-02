@@ -25,8 +25,14 @@ Las funcionalidades que pienso deberia estar en el cliente son las siguiente:
   - El usuario debe poder iniciar una tarea incluso si no tiene nombre. Además, el usuario debería poder pausarlo o reiniciarlo.
   - Finalmente, cada tarea debe tener una forma de "continuar" para rehabilitar esa tarea (empezar a registrar el tiempo de una tarea tomando el nombre de la que va a continuar).
 
+  La primera necesita un proceso de actualizar constantemente el tiempo transcurrido y el dejar esta funcionalidad al backend va ser un trabajo mas laborioso porque tendra que mantener de forma concurrente los tiempos de los usuarios y esto puede llegar a consumir memoria, esta tarea puede ser facil de implementar en un cliente web y ese proceso se deja en el lado del cliente, por lo que cada cliente manejara su tiempo de forma independiente.
+
+  para la segunda igualmente necesitara luego de acceder a la API para obtener el ultimo estado de su tarea, necesitara seguir actualizando el tiempo transcurrido, por lo que esto deberia llevarlo tambien el cliente web.
+
+
 ## Infraestructura
 La aplicacion se encuentra ubicada en un servidor EC2 de amazon sobre un servidor ubuntu, ademas en este mismo aunque no es buena practica y solo por ser de prueba se coloco un servicio de Mongodb sobre este mismo servidor.
+Para ver la implementacion de un servidor EC2 [presione aqui](INFRAESTRUCTURA.md)
 
 
 ## Para la instalacion 
@@ -44,7 +50,7 @@ La aplicacion se encuentra ubicada en un servidor EC2 de amazon sobre un servido
  Aqui puede ver el codigo fuente del proyecto de la UI
  [TaskTimerUI](https://github.com/cristian-programmer/TaskTimerUI)
 
- ![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/tasktimerui.PNG)
+ ![](screenshots/tasktimerui.png)
 
 
 
