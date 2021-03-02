@@ -25,7 +25,7 @@ const createTask = async (task) => {
 
 const getAllTaskByUser = async (idUser) => {
   console.log("getAllTaskByUser ", idUser);
-  return await taskModel.find(idUser);
+  return await taskModel.find(idUser).sort({ createdAt: "desc" });
 };
 
 const getAllTask = async () => {
@@ -33,8 +33,9 @@ const getAllTask = async () => {
 };
 
 const addTimeTracking = async (idTask, time) => {
+  console.log(time);
   try {
-    return await taskModel.updateOne({ _id: idTask }, { time });
+    return await taskModel.updateOne({ _id: idTask }, time);
   } catch (error) {
     return error;
   }
