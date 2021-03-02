@@ -22,8 +22,12 @@ router.patch("/tasks/:id", async (req, res) => {
   const time = req.body;
   try {
     if (idTask && time) {
-      const updated = taskModel.addTimeTracking(idTask, time);
-      return res.status(201).json({ updated });
+      const updated = await taskModel.addTimeTracking(idTask, time);
+      if (updated.n > 0) {
+        return res.status(201).json({ updated: "updated" });
+      } else {
+        return res.status(400).json({ updated: "no-updated" });
+      }
     }
     res.status(400).json({ error: "missing send parameters" });
   } catch (error) {
