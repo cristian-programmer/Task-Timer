@@ -7,25 +7,25 @@ A continuación veremos los pasos a seguir para levantar un servidor EC2
 usando la consola web de aws.
 
 - Se ingresa a la cuenta
-![](screenshots/awslogin.png)
+![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/awslogin.PNG)
 
 - se va a los servicios una vez logeado y seleciona en Informatica EC2
-![](screenshots/awsmenuservices.png)
+![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/awsmenuservices.PNG)
 
 - se crea una instancia
-![](screenshots/awscrearinstancia.png)
+![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/awscrearinstancia.PNG)
 
 - se seleciona un sistema operativo, para hacer uso de la capa gratuita selecionamos uno que diga: Apto para la capa gratuita.
-![](screenshots/awsselectos.png)
+![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/awsselectos.PNG)
 
 
 - para que nuesta API se pueda llamar debemos registrar un security group exponiendo los puertos que estaran abiertos, ssh estara por defecto para que podamos conectarnos al servidor, ademas del http 80 y TCP personalizado en puerto 30000 para acceder a la aplicación en React.js.
-![](screenshots/awseditgroup.png)
-
+![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/awseditgroup.PNG)
+![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/awsports.PNG)
 
 - luego obtenemos una Key para poder conectarnos a traves de ssh, en mi caso utilizare una que ya he creado previamente.
 
-![](screenshots/awskey.png)
+![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/awskey.PNG)
 
 - por ultimo la instancia se lanzara e iniciara
-![](screenshots/awsinstancestart.png)
+![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/awsinstancestart.PNG)
