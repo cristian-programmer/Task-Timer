@@ -29,7 +29,7 @@ router.post("/projects", async (req, res)=> {
       }else {
         res.sendStatus(404);
       }
-       
+
     }else {
       res.sendStatus(404);
     }
@@ -43,13 +43,15 @@ router.patch("/projects/:id/task", async (req, res) => {
   const idProject = req.params.id;
   const {idTask} = req.body;
   try {
-    if(idProject !== "" && idTask !== ""){
+    if(idProject && idTask){
       const updated = await projectModel.addTasktoAproject(idProject, idTask);
       console.log("updated ",updated);
-      if(updated.nModified > 0) res.sendStatus(201);
-      else  res.sendStatus(404);
+      if(updated.nModified > 0)
+	return res.status(200).json({updated: "updated"});
+
     }
-    res.sendStatus(404);
+
+    res.status(400).json({error:"missing send parameters"});
   } catch (error){
     console.log(error);
     res.sendStatus(500);
