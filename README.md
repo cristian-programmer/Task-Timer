@@ -44,7 +44,7 @@ La aplicacion se encuentra ubicada en un servidor EC2 de amazon sobre un servido
  Aqui puede ver el codigo fuente del proyecto de la UI
  [TaskTimerUI](https://github.com/cristian-programmer/TaskTimerUI)
 
- ![](screenshots/tasktimerui.png)
+ ![](https://github.com/cristian-programmer/Task-Timer/blob/main/screenshots/tasktimerui.PNG)
 
 
 
