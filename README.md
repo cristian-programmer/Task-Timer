@@ -32,7 +32,8 @@ Las funcionalidades que pienso deberia estar en el cliente son las siguiente:
 
 ## Infraestructura
 La aplicacion se encuentra ubicada en un servidor EC2 de amazon sobre un servidor ubuntu, ademas en este mismo aunque no es buena practica y solo por ser de prueba se coloco un servicio de Mongodb sobre este mismo servidor.
-Para ver la implementacion de un servidor EC2 [presione aqui](INFRAESTRUCTURA.md)
+
+Para ver la implementacion de un servidor EC2 [presione aqui](INFRAESTRUCTURE.md)
 
 
 ## Para la instalacion 
