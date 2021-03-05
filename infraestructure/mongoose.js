@@ -6,10 +6,10 @@ const MONGO_DB_HOST =
     ? config.get("MONGO_DB_HOST")
     : process.env.MONGO_DB_HOST;
 console.log("Connection " + MONGO_DB_HOST);
-const testURL = "mongodb://localhost";
+
 const createConnection = () => {
   mongoose
-    .connect(testURL, {
+    .connect(MONGO_DB_HOST, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
