@@ -9,7 +9,7 @@ console.log("Connection " + MONGO_DB_HOST);
 const testURL = "mongodb://localhost";
 const createConnection = () => {
   mongoose
-    .connect(MONGO_DB_HOST, {
+    .connect(testURL, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
