@@ -55,7 +55,7 @@ Para ver la implementacion de un servidor EC2 [presione aqui](INFRAESTRUCTURE.md
 
 ## Extra
  No hace parte de los requerimientos pero decidi implementar una Aplicacion
- que interactuara con la API, esta desarrollada en Reactjs y hospedad en amazon amplify con dominio y certificado https, puede verla [Aqui](https://www.tasktimer.cf/), Esto lo hice pensando en implementar uno de los requerimientos, la cual era llevar el tiempo las tareas.
+ que interactuara con la API, esta desarrollada en Reactjs y hospedad en amazon amplify con dominio y certificado https, puede verla [Aqui](https://www.app.tasktimer.cf/), Esto lo hice pensando en implementar uno de los requerimientos, la cual era llevar el tiempo las tareas.
  Aqui puede ver el codigo fuente del proyecto de la UI
  [TaskTimerUI](https://github.com/cristian-programmer/TaskTimerUI)
 
