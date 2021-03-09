@@ -53,12 +53,19 @@ router.post("/tasks", async (req, res) => {
   }
 });
 
-router.post("/tasks/:id", async (req, res) => {
-  const idTask = req.params.id;
+router.get("/tasks/:ids", async (req, res) => {
+  const ids = req.params.ids;
+  const idTasks = ids.split(",");
+  console.log("ids: ", ids + " idTasks", idTasks);
+  let tasks = [];
   try {
-    if (idTask) {
-      const task = await taskModel.getTaskById(idTask);
-      return res.status(200).json(task);
+    if (idTasks.length > 0) {
+      for (let i in idTasks) {
+        const task = await taskModel.getTaskById(idTasks[i]);
+        tasks.push(task[0]);
+      }
+
+      return res.status(200).json(tasks);
     }
     return res.status(400).json({ error: "missing send parameters" });
   } catch (error) {
