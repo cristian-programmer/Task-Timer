@@ -53,4 +53,18 @@ router.post("/tasks", async (req, res) => {
   }
 });
 
+router.post("/tasks/:id", async (req, res) => {
+  const idTask = req.params.id;
+  try {
+    if (idTask) {
+      const task = await taskModel.getTaskById(idTask);
+      return res.status(200).json(task);
+    }
+    return res.status(400).json({ error: "missing send parameters" });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;

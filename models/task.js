@@ -47,7 +47,15 @@ const addTimeTracking = async (idTask, time) => {
 
 const cleanSchemaTask = async () => {
   try {
-    return await userModel.deleteMany({});
+    return await taskModel.deleteMany({});
+  } catch (error) {
+    return error;
+  }
+};
+
+const getTaskById = async (id) => {
+  try {
+    return await taskModel.find({ _id: id });
   } catch (error) {
     return error;
   }
@@ -58,5 +66,6 @@ module.exports = {
   getAllTaskByUser,
   getAllTask,
   addTimeTracking,
+  getTaskById,
   cleanSchemaTask,
 };
