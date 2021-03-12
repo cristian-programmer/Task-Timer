@@ -7,11 +7,13 @@ El proyecto esta escrito en Nodejs, Express, Mongodb para el backend
 para ver la documentacion de la API en postman puede ir al siguiente enlace.
 
 [Documentacion API con postman](https://documenter.getpostman.com/view/5820410/TWDfCCfw)
+
 ## Actualizaciones
 - se implemento https en la api, ademas de un dominio para la api [x]
 - se implemento el frontend con https y dominio [x]
 - se trabaja en un CI/CD pero un esta en proceso 
 - pendiente la actualizacion de la API de postman [x]
+- ***Se han removido los dominios y servidores de AWS para no generar costos.***
 
 ## Requerimientos 
 Los casos de uso que debe tener la aplicacion son los siguientes y aquellos que estan implementados tienen la marca [x]
